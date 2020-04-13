@@ -1,0 +1,29 @@
+.story-pagination{
+  list-style: none;
+  font-size: 14px;
+  margin: 0;
+  padding: 10px;
+}
+
+.story-pagination-item{
+  display: inline-block;
+  height: 32px;
+  min-width: 32px;
+  list-style: none;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #eee;
+  border-radius: 2px;
+  line-height: 30px;
+}
+
+.story-pagination-item + .story-pagination-item{
+  margin-left: 5px;
+}
+
+.story-pagination-item a{
+  display: block;
+  padding: 0 5px;
+}

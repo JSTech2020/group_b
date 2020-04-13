@@ -1,0 +1,17 @@
+.icon-with-text{
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  margin: 5px;
+}
+
+.icon-with-text span{
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  display: inline-block;
+}
