@@ -7,13 +7,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var quizRouter = require('./routes/quiz');
 var eventEmitter = require('./events/zs-event-emitter');
+var events = require('./events/events');
+var achievementSystem = require('./events/subscribers/achievements/achievement-system');
 
 var app = express();
 
-app.use(cors())
+app.use(cors());
 
 // MongoDB connection
 mongoose.connect('mongodb://localhost:27017/zukunftschreiben', { useNewUrlParser: true });
@@ -32,7 +33,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/quiz', quizRouter);
 
 // catch 404 and forward to error handler
@@ -40,7 +40,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-
+eventEmitter.emit(events.user.signIn, {name: 'test'});
 
 // error handler
 app.use(function(err, req, res, next) {
