@@ -13,7 +13,7 @@ class Quiz extends React.Component{
     this.state = {
       showResult: false,
       currentQuestion: 0,
-      starsCollected: 0,
+      starsCollected: 0
     }
   }
 
@@ -36,13 +36,7 @@ class Quiz extends React.Component{
 
     questions[currentQuestion].correctlyAnswered = answer.isCorrect;
     const newStarsCollected = answer.isCorrect ? starsCollected + questions[currentQuestion].reward : starsCollected;
-    this.setState({questions: questions, showResult: true, starsCollected: newStarsCollected});
-
-    if(answer.isCorrect){
-      // TODO: Send request to server to get reward
-    }
-
-    this.nextQuestion();
+    this.setState({questions: questions, showResult: true, starsCollected: newStarsCollected}, () => this.nextQuestion());
   }
 
   nextQuestion(){
@@ -54,6 +48,14 @@ class Quiz extends React.Component{
       }, 3000);
       
     } else { // Finished all questions
+      // Send request to server to save reward
+      if(starsCollected > 0){
+        const { starsCollected } = this.state;
+        let requestBody = {
+          quizId: this.props.id,
+          reward: starsCollected
+        }
+      }
       setTimeout(()=>{
         this.setState({showResult: false}, this.props.onFinish);
       }, 3000);
