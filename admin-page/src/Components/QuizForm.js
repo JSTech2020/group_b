@@ -15,13 +15,13 @@ class QuizForm extends React.Component {
                 solutionFour: {solution: "4", isCorrect: true},
             }),
         };
-        console.log(this.state.cats)
     }
 
 
     handleChange = (e) => {
-        if (["name", "age"].includes(e.target.className)) {
-            let cats = [...this.state.cats];
+        //console.log(this.state);
+        if (["question", "age"].includes(e.target.className)) {
+            let cats = [...this.state.questions];
             cats[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase();
             this.setState({cats}, () => console.log(this.state.cats))
         } else {
@@ -52,7 +52,7 @@ class QuizForm extends React.Component {
                                     data-id={idx}
                                     id={questionId}
                                     value={questions[idx].question}
-                                    className="name"
+                                    className="question"
                                 />
                                 <label htmlFor={solutionOneId}>A</label>
                                 <input
@@ -61,10 +61,10 @@ class QuizForm extends React.Component {
                                     data-id={idx}
                                     id={solutionOneId}
                                     value={questions[idx].solutionOne.solution}
-                                    className="age"
+                                    className="solutionOne"
                                 />
                                 <input
-                                    name="isGoing"
+                                    name="isCorrect"
                                     type="checkbox"
                                     checked={questions[idx].solutionOne.isCorrect}
                                     onChange={this.handleInputChange} />
@@ -75,10 +75,10 @@ class QuizForm extends React.Component {
                                     data-id={idx}
                                     id={solutionTwoId}
                                     value={questions[idx].solutionTwo.solution}
-                                    className="age"
+                                    className="solutionTwo"
                                 />
                                 <input
-                                    name="isGoing"
+                                    name="isCorrect"
                                     type="checkbox"
                                     checked={questions[idx].solutionOne.isCorrect}
                                     onChange={this.handleInputChange} />
@@ -89,10 +89,10 @@ class QuizForm extends React.Component {
                                     data-id={idx}
                                     id={solutionThreeId}
                                     value={questions[idx].solutionTwo.solution}
-                                    className="age"
+                                    className="solutionThree"
                                 />
                                 <input
-                                    name="isGoing"
+                                    name="isCorrect"
                                     type="checkbox"
                                     checked={questions[idx].solutionOne.isCorrect}
                                     onChange={this.handleInputChange} />
@@ -103,10 +103,10 @@ class QuizForm extends React.Component {
                                     data-id={idx}
                                     id={soltuionFourId}
                                     value={questions[idx].solutionThree.solution}
-                                    className="age"
+                                    className="solutionFour"
                                 />
                                 <input
-                                    name="isGoing"
+                                    name="isCorrect"
                                     type="checkbox"
                                     checked={questions[idx].solutionFour.isCorrect}
                                     onChange={this.handleInputChange} />
