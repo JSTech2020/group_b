@@ -4,7 +4,7 @@ let events = {
     signUp: 'onUserSignUp'
   },
   quiz: {
-    submit: 'onQuizSubmit'
+    answered: 'onQuizAnswered'
   },
   achievement: {
     completed: 'onAchievementCompleted'

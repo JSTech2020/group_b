@@ -5,7 +5,7 @@ class QuizCompleted extends Achievement{
 
   constructor(){
 
-    let onQuizSubmitted = (user, quiz) => {
+    let onQuizAnswered = (user, quiz) => {
       console.log("TODO: Implement quiz completion reward in file /events/subscribers/achievements/quiz.completed.js");
     }
 
@@ -13,7 +13,7 @@ class QuizCompleted extends Achievement{
       'quiz_completed',
       5,
       {
-        [events.quiz.submit]: onQuizSubmitted
+        [events.quiz.answered]: onQuizAnswered
       }
     );
   }

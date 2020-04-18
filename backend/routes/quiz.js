@@ -70,15 +70,21 @@ router.get('/dummydata', async function(req, res, next){
 });
 
 /* POST quiz answer. */
-router.post('/:id/answer', async function(req, res, next) {
+router.post('/:id/submit', async function(req, res, next) {
   // TODO check that answer was correct and give user reward
   let quizId = req.params.id;
   let quiz = await QuizModel.findById(quizId).exec();
-  const { answerId } = req.body;
   if(quiz !== null){
-    res.json(quiz);
+    // Check "user input" reward that can't exceed the sum of all questions rewards
+    const { reward } = req.body;
+    let maxReward = quiz.questions.reduce((q1, q2) => q1.reward + q2.reward);
+    let resp = {
+      reward: reward <= maxReward ? reward : 0,
+      allCorrect: reward === maxReward
+    }
+    res.json(resp);
   } else {
-    res.status(404).json({error: 'Quiz not found.'});
+    res.status(404).json({error: 'Quiz id not found.'});
   }
 });
 
@@ -91,7 +97,7 @@ router.get('/:id', function(req, res, next) {
     } else {
       res.json(err);
     }
-  })
+  });
 });
 
 module.exports = router;

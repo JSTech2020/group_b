@@ -4,7 +4,7 @@ import './IconWithText.css';
 
 function IconWithText(props){
 
-  let { icon, text, size, iconColor, textColor } = props;
+  let { icon, text, size, iconColor, textColor, highlight } = props;
   if(!size){
     size = '48px';
   }
@@ -27,9 +27,13 @@ function IconWithText(props){
     textStyle.color = textColor;
   }
 
+  let classNames = "icon-with-text";
+  if(highlight)
+    classNames += " highlight";
+
   return (
     <IconContext.Provider value={{ style: iconStyle}}>
-      <div style={{width: size, height: size}} className="icon-with-text">
+      <div style={{width: size, height: size}} className={classNames}>
         <span style={textStyle} className="center">{text}</span>
         {icon}
       </div>
