@@ -1,0 +1,16 @@
+node_modules/
+bundle.js
+npm-debug.log
+
+*/.idea
+.idea
+
+.env
+.passport.js
+.DS_Store
+
+build/
+dist/
+
+yarn.lock
+sendgrid.env
