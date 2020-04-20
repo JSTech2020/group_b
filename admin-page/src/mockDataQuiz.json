@@ -1,0 +1,36 @@
+{
+  "quizzes": [
+    {
+      "question": "Question 1",
+      "answerOne": "A",
+      "answerTwo": "B",
+      "answerThree": "C",
+      "answerFour": "D",
+      "correctAnswer": 0
+    },
+    {
+      "question": "Question 2",
+      "answerOne": "A",
+      "answerTwo": "B",
+      "answerThree": "C",
+      "answerFour": "D",
+      "correctAnswer": 1
+    },
+    {
+      "question": "Question 3",
+      "answerOne": "A",
+      "answerTwo": "B",
+      "answerThree": "C",
+      "answerFour": "D",
+      "correctAnswer": 2
+    },
+    {
+      "question": "Question 4",
+      "answerOne": "A",
+      "answerTwo": "B",
+      "answerThree": "C",
+      "answerFour": "D",
+      "correctAnswer": 3
+    }
+  ]
+}
