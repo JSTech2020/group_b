@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {QuestionModel} from "./Model/QuestionModel";
 import QuizForm from "./Components/QuizForm"
+import StoryPage from "./Components/StoryPage";
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
 
     return (
         <div className="App">
-            <QuizForm pages={4}/>
+            <StoryPage/>
         </div>
     );
 }

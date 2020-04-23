@@ -1,123 +1,121 @@
-import React from "react"
+import React from "react";
+import StoryModel from "../Model/StoryModel";
+
+import dataQuizzes from "../mockDataQuiz.json";
 
 class QuizForm extends React.Component {
-    constructor(pages) {
-        super(pages);
-        this.pages = pages;
-        console.log(pages);
-        //todo: dont hardcode here
-        this.state = {
-            questions: Array(4).fill({
-                question: "1",
-                solutionOne: {solution: "1", isCorrect: false},
-                solutionTwo: {solution: "2", isCorrect: false},
-                solutionThree: {solution: "3", isCorrect: false},
-                solutionFour: {solution: "4", isCorrect: true},
-            }),
-        };
+  state = {
+    ...this.returnStateObject(),
+  };
+
+  returnStateObject() {
+    if (this.props.currentIndex == -1)
+      return {
+        question: "",
+        answerOne: "",
+        answerTwo: "",
+        answerThree: "",
+        answerFour: "",
+        correctAnswer: "",
+      };
+    else return this.props.list[this.props.currentIndex];
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.currentIndex != this.props.currentIndex ||
+      prevProps.list != this.props.list
+    ) {
+      this.setState({ ...this.returnStateObject() });
+      console.log(prevProps, this.props);
     }
+  }
 
+  handleInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
 
-    handleChange = (e) => {
-        //console.log(this.state);
-        if (["question", "age"].includes(e.target.className)) {
-            let cats = [...this.state.questions];
-            cats[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase();
-            this.setState({cats}, () => console.log(this.state.cats))
-        } else {
-            this.setState({[e.target.name]: e.target.value.toUpperCase()})
-        }
-    };
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.onAddOrEdit(this.state);
+  };
 
-    handleSubmit = (e) => {
-        e.preventDefault()
-    };
-
-    render() {
-        let {questions} = this.state;
-
-        return (
-            <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-                {
-                    questions.map((val, idx) => {
-                        let questionId = `cat-${idx}`, solutionOneId = `age-${idx}`, solutionTwoId = `age-${idx}`,
-                            solutionThreeId = `age-${idx}`,
-                            soltuionFourId = `age-${idx}`;
-                        return (
-                            <div key={idx}>
-                                <label htmlFor={questionId}>{`Question #${idx + 1}`}</label>
-                                <input
-                                    type="text"
-                                    name={questionId}
-                                    data-id={idx}
-                                    id={questionId}
-                                    value={questions[idx].question}
-                                    className="question"
-                                />
-                                <label htmlFor={solutionOneId}>A</label>
-                                <input
-                                    type="text"
-                                    name={solutionOneId}
-                                    data-id={idx}
-                                    id={solutionOneId}
-                                    value={questions[idx].solutionOne.solution}
-                                    className="solutionOne"
-                                />
-                                <input
-                                    name="isCorrect"
-                                    type="checkbox"
-                                    checked={questions[idx].solutionOne.isCorrect}
-                                    onChange={this.handleInputChange} />
-                                <label htmlFor={solutionTwoId}>B</label>
-                                <input
-                                    type="text"
-                                    name={solutionTwoId}
-                                    data-id={idx}
-                                    id={solutionTwoId}
-                                    value={questions[idx].solutionTwo.solution}
-                                    className="solutionTwo"
-                                />
-                                <input
-                                    name="isCorrect"
-                                    type="checkbox"
-                                    checked={questions[idx].solutionOne.isCorrect}
-                                    onChange={this.handleInputChange} />
-                                <label htmlFor={solutionThreeId}>C</label>
-                                <input
-                                    type="text"
-                                    name={solutionThreeId}
-                                    data-id={idx}
-                                    id={solutionThreeId}
-                                    value={questions[idx].solutionTwo.solution}
-                                    className="solutionThree"
-                                />
-                                <input
-                                    name="isCorrect"
-                                    type="checkbox"
-                                    checked={questions[idx].solutionOne.isCorrect}
-                                    onChange={this.handleInputChange} />
-                                <label htmlFor={soltuionFourId}>D</label>
-                                <input
-                                    type="text"
-                                    name={soltuionFourId}
-                                    data-id={idx}
-                                    id={soltuionFourId}
-                                    value={questions[idx].solutionThree.solution}
-                                    className="solutionFour"
-                                />
-                                <input
-                                    name="isCorrect"
-                                    type="checkbox"
-                                    checked={questions[idx].solutionFour.isCorrect}
-                                    onChange={this.handleInputChange} />
-                            </div>
-                        )
-                    })
-                }
-                <input type="submit" value="Submit"/>
-            </form>
-        )
+  changeCorrectAnswer(index) {
+    if (index === this.state.correctAnswer) {
+      this.setState({
+        correctAnswer: -1,
+      });
+    } else {
+      this.setState({
+        correctAnswer: index,
+      });
     }
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit} autoComplete="off">
+        <input
+          name="question"
+          placeholder="Question"
+          onChange={this.handleInputChange}
+          value={this.state.question}
+        />
+        <br />
+        <input
+          type="checkbox"
+          checked={0 === this.state.correctAnswer}
+          onChange={() => this.changeCorrectAnswer(0)}
+        />
+        <input
+          name="answerOne"
+          placeholder="answerOne"
+          onChange={this.handleInputChange}
+          value={this.state.answerOne}
+        />
+        <br />
+        <input
+          type="checkbox"
+          checked={1 === this.state.correctAnswer}
+          onChange={() => this.changeCorrectAnswer(1)}
+        />
+        <input
+          name="answerTwo"
+          placeholder="answerTwo"
+          onChange={this.handleInputChange}
+          value={this.state.answerTwo}
+        />
+        <br />
+        <input
+          type="checkbox"
+          checked={2 === this.state.correctAnswer}
+          onChange={() => this.changeCorrectAnswer(2)}
+        />
+        <input
+          name="answerThree"
+          placeholder="answerThree"
+          onChange={this.handleInputChange}
+          value={this.state.answerThree}
+        />
+        <br />
+        <input
+          type="checkbox"
+          checked={3 === this.state.correctAnswer}
+          onChange={() => this.changeCorrectAnswer(3)}
+        />
+        <input
+          name="answerFour"
+          placeholder="answerFour"
+          onChange={this.handleInputChange}
+          value={this.state.answerFour}
+        />
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+    );
+  }
 }
 
-export default QuizForm
+export default QuizForm;

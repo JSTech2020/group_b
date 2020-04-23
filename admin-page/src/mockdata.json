@@ -1,0 +1,17 @@
+{
+  "stories": [
+    {
+      "id": 1,
+      "title": "Story 1",
+      "content": "test",
+      "pages": 2
+    },
+    {
+      "id": 2,
+      "title": "Story 2",
+      "content": "test",
+      "pages:": 2
+    }
+  ]
+}
+
