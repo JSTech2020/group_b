@@ -33,7 +33,7 @@ function IconWithText(props){
 
   return (
     <IconContext.Provider value={{ style: iconStyle}}>
-      <div style={{width: size, height: size}} className={classNames}>
+      <div style={{width: size, height: size, zIndex: 9999}} className={classNames}>
         <span style={textStyle} className="center">{text}</span>
         {icon}
       </div>

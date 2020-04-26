@@ -18,6 +18,12 @@ const story = {
     {
       page: 0,
       timing: "after",
+      type: 'puzzle',
+      id: '5e9457e4b81d2f5eb0a5f3ad'
+    },
+    {
+      page: 0,
+      timing: "after",
       type: 'quiz',
       id: '5e9457e4b81d2f5eb0a5f3ad'
     }

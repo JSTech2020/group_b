@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal'
-import Quiz from './Quiz.js';
+import Quiz from './Quiz';
+import Puzzle from './Puzzle'
 
 class GamesView extends React.Component{
 
@@ -38,6 +39,15 @@ class GamesView extends React.Component{
             onFinish={this.onGameFinished.bind(this)}
           />
         );
+      break;
+
+      case 'puzzle':
+          gameTitle = "Puzzle";
+          gameComponent = (
+            <Puzzle 
+              image={'https://cutewallpaper.org/21/nice-wallpaper-pictures/Nice-Wallpapers-Top-Free-Nice-Backgrounds-WallpaperAccess.jpg'}
+            />
+          )
       break;
     }
 
