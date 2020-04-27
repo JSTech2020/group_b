@@ -31,7 +31,10 @@ class Quiz extends React.Component{
       .then(res => {
         this.setState(res.data);
       })
-      .catch(reason => console.log(reason));
+      .catch(reason => {
+        console.log(reason);
+        this.props.onFinish();
+      });
   }
 
   onAnswer(e, answer){
