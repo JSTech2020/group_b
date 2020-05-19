@@ -3,6 +3,10 @@ import StoryModel from "../Model/StoryModel";
 
 import dataQuizzes from "../mockDataQuiz.json";
 
+import { Select } from "antd";
+
+const { Option } = Select;
+
 class QuizForm extends React.Component {
   state = {
     ...this.returnStateObject(),
@@ -17,6 +21,7 @@ class QuizForm extends React.Component {
         answerThree: "",
         answerFour: "",
         correctAnswer: "",
+        storyId: "",
       };
     else return this.props.list[this.props.currentIndex];
   }
@@ -27,7 +32,6 @@ class QuizForm extends React.Component {
       prevProps.list != this.props.list
     ) {
       this.setState({ ...this.returnStateObject() });
-      console.log(prevProps, this.props);
     }
   }
 
@@ -39,6 +43,7 @@ class QuizForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log(this.state);
     this.props.onAddOrEdit(this.state);
   };
 
@@ -54,7 +59,17 @@ class QuizForm extends React.Component {
     }
   }
 
+  handleStoryChange = (e) => {
+    this.setState({
+      storyId: e,
+    });
+  };
+
   render() {
+    const storyList = this.props.stories.map((story, index) => {
+      return <Option value={story.id}>{story.title}</Option>;
+    });
+
     return (
       <form onSubmit={this.handleSubmit} autoComplete="off">
         <input
@@ -112,6 +127,15 @@ class QuizForm extends React.Component {
           value={this.state.answerFour}
         />
         <br />
+        <div>
+          <Select
+            defaultValue="Choose Story"
+            style={{ width: 120 }}
+            onChange={this.handleStoryChange}
+          >
+            {storyList}
+          </Select>
+        </div>
         <button type="submit">Submit</button>
       </form>
     );

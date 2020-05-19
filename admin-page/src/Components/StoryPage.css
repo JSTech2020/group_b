@@ -1,3 +1,7 @@
 .quiz-item {
     display: inline;
 }
+
+.correct {
+    background-color: #85e085;
+}
